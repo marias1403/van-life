@@ -21,6 +21,7 @@ export default function Vans() {
     <div key={van.id} className="van-tile">
       <Link
         to={`/vans/${van.id}`}
+        state={{ search: searchParams.toString() }}
         aria-label={`View details for ${van.name}, priced at $${van.price} per day`}
       >
         <img src={van.imageUrl} alt={`Image of ${van.name}`} />
@@ -36,12 +37,23 @@ export default function Vans() {
     </div>
   ));
 
+  function handleFilterChange(key, value) {
+    setSearchParams((prevParams) => {
+      if (value === null) {
+        prevParams.delete(key);
+      } else {
+        prevParams.set(key, value);
+      }
+      return prevParams;
+    });
+  }
+
   return (
     <div className="van-list-container">
       <h1>Explore our van options</h1>
       <div className="van-list-filter-buttons">
         <button
-          onClick={() => setSearchParams({ type: 'simple' })}
+          onClick={() => handleFilterChange('type', 'simple')}
           className={`van-type simple ${
             typeFilter === 'simple' ? 'selected' : ''
           }`}
@@ -49,7 +61,7 @@ export default function Vans() {
           Simple
         </button>
         <button
-          onClick={() => setSearchParams({ type: 'luxury' })}
+          onClick={() => handleFilterChange('type', 'luxury')}
           className={`van-type luxury ${
             typeFilter === 'luxury' ? 'selected' : ''
           }`}
@@ -57,7 +69,7 @@ export default function Vans() {
           Luxury
         </button>
         <button
-          onClick={() => setSearchParams({ type: 'rugged' })}
+          onClick={() => handleFilterChange('type', 'rugged')}
           className={`van-type rugged ${
             typeFilter === 'rugged' ? 'selected' : ''
           }`}
@@ -66,7 +78,7 @@ export default function Vans() {
         </button>
         {!!typeFilter && (
           <button
-            onClick={() => setSearchParams({})}
+            onClick={() => handleFilterChange('type', null)}
             className="van-type clear-filters"
           >
             Clear filter
