@@ -22,6 +22,7 @@ import Layout from './components/Layout';
 import HostLayout from './components/HostLayout';
 import NotFound from './pages/NotFound';
 import Error from './components/Error';
+import Login from './pages/Login';
 import './server';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
       <Route path="/" element={<Layout />} errorElement={<Error />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="login" element={<Login />} />
         <Route path="vans" element={<Vans />} loader={vansLoader} />
         <Route path="vans/:id" element={<VanDetail />} />
 
