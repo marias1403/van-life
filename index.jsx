@@ -24,7 +24,10 @@ import Layout from './components/Layout';
 import HostLayout from './components/HostLayout';
 import NotFound from './pages/NotFound';
 import Error from './components/Error';
-import Login from './pages/Login';
+import Login, {
+  loader as loginLoader,
+  action as loginAction,
+} from './pages/Login';
 import { requireAuth } from './utils/utils';
 import './server';
 
@@ -34,7 +37,12 @@ function App() {
       <Route path="/" element={<Layout />} errorElement={<Error />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="login" element={<Login />} />
+        <Route
+          path="login"
+          element={<Login />}
+          loader={loginLoader}
+          action={loginAction}
+        />
         <Route path="vans" element={<Vans />} loader={vansLoader} />
         <Route
           path="vans/:id"
