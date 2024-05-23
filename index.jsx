@@ -43,10 +43,16 @@ function App() {
           loader={loginLoader}
           action={loginAction}
         />
-        <Route path="vans" element={<Vans />} loader={vansLoader} />
+        <Route
+          path="vans"
+          element={<Vans />}
+          errorElement={<Error />}
+          loader={vansLoader}
+        />
         <Route
           path="vans/:id"
           element={<VanDetail />}
+          errorElement={<Error />}
           loader={vanDetailLoader}
         />
 
@@ -66,10 +72,16 @@ function App() {
             element={<Reviews />}
             loader={async ({ request }) => await requireAuth(request)}
           />
-          <Route path="vans" element={<HostVans />} loader={hostVansLoader} />
+          <Route
+            path="vans"
+            element={<HostVans />}
+            errorElement={<Error />}
+            loader={hostVansLoader}
+          />
           <Route
             path="vans/:id"
             element={<HostVanDetail />}
+            errorElement={<Error />}
             loader={hostVanDetailLoader}
           >
             <Route
